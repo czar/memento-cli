@@ -1,0 +1,6 @@
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+# Ignore local config files (not the repo itself)
+.zshrc
+.bashrc

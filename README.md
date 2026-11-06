@@ -16,7 +16,7 @@ It injects "Interrupt Signals"—short, high-density quotes—into your shell st
 If you trust the source, run this command:
 ```bash
 curl -sSL https://raw.githubusercontent.com/czar/memento-cli/main/install.sh | bash
-
+```
 ## 🛠 Installation (Manual)
 1. Clone the repo: `git clone https://github.com/czar/memento-cli.git`
 2. Enter the directory: `cd memento-cli`

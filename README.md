@@ -128,13 +128,10 @@ No more reading long lists of numbers. The new interface provides a high-density
 * **The HUD Mode (`-v`)**: For those who want the full, high-signal breakdown of their current state.
 * **The Biological Truth Mode (`--long`)**: For those who wish to bypass the chaos and see the raw, uncollapsed mathematical data.
 
-
----
-*Built with intent to minimize entropy.*
----
-
 ## 🛡️ License
 
 This project is released under the MIT License. The philosophical content (LamRim quotes) is provided as Public Domain content for the purpose of mindfulness practice. Mementomori & mori-kernel is a derivative of makeyourownmaker/mementomori, and is licensed under GPL-2
 
+---
+*Built with intent to minimize entropy.*
 ---

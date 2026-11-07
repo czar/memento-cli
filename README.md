@@ -17,12 +17,12 @@ It injects "Interrupt Signals"—short, high-density quotes—into your shell st
 - **Vanitas Protocol:** To reduce attachment to digital/material clutter.
 - **Decay Protocol:** To ground the user in the biological reality of impermanence.
 
-## 🚀 One-Line Installation
+## 🚀 One-Line Installation (no_mori)
 If you trust the source, run this command:
 ```bash
-curl -sSL https://raw.githubusercontent.com/czar/memento-cli/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/czar/memento-cli/main/install-no_mori.sh | bash
 ```
-## 🛠 Installation (Manual)
+## 🛠 Installation (Full, includes mementomori)
 1. Clone the repo: `git clone https://github.com/czar/memento-cli.git`
 2. Enter the directory: `cd memento-cli`
 3. Run the installer: `./install.sh`

@@ -93,9 +93,20 @@ The `install.sh` script utilizes `sed` and `shuf` for non-intrusive, lightweight
 QUOTE=$(sed -n 's/^\* \"\([^\"]*\)\" #.*/\1/p' ~/.lamrim_death.txt | shuf -n 1)
 ```
 
+## 📜 Credits & Lineage
+
+This project is a modified fork/extension of **mementomori**.
+
+*   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
+*   **My Contribution:** Stochastic Modeling: Implemented a probabilistic "imminence" system to simulate life's uncertainty, UI Overhaul: Developed a high-signal HUD with ANSI color support and visual entropy bars & Refactored for Python 3 standards. 
+
+
+---
+*Built with intent to minimize entropy.*
 ---
 
 ## 🛡️ License
-This project is released under the MIT License. The philosophical content (LamRim quotes) is provided as Public Domain content for the purpose of mindfulness practice.
+
+This project is released under the MIT License. The philosophical content (LamRim quotes) is provided as Public Domain content for the purpose of mindfulness practice. Mementomori & mori-kernel is a derivative of makeyourownmaker/mementomori, and is licensed under GPL-2
 
 ---

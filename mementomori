@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ==============================================================================
+# mori-kernel (Optimized)
+# ------------------------------------------------------------------------------
+# Author: Czar_Automata (czar)
+# Based on: mementomori (https://github.com/makeyourownmaker/mementomori)
+# License: MIT (This script is licensed under the MIT license, 
+# but incorporates logic derived from GPL-2 projects).
+# ==============================================================================
 import sys
 import argparse
 import random

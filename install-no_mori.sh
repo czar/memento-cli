@@ -1,6 +1,11 @@
 #!/bin/bash
-# memento-cli Installer
+# ==============================================================================
+# memento-cli no mori Integrated Installer (Optimized)
+# ------------------------------------------------------------------------------
+# Author: Czar_Automata (czar)
 # Includes: Quotes from Tsongkhapa's LamRim (Public Domain Content)
+# License: MIT 
+# ==============================================================================
 # 1. Create the Data Store
 cat << 'EOF' > ~/.lamrim_death.txt
 # SOURCE: LamRim (Stages of the Path to Enlightenment)

@@ -1,7 +1,11 @@
 #!/bin/bash
-# memento-cli & mori-kernel Integrated Installer (Optimized)
+# ==============================================================================
+# memento-cli Integrated Installer (Optimized)
+# ------------------------------------------------------------------------------
+# Author: Czar_Automata (czar)
 # Includes: Quotes from Tsongkhapa's LamRim (Public Domain Content)
-
+# License: MIT 
+# ==============================================================================
 # --- Configuration ---
 BIN_DIR="$HOME/.local/bin"
 mkdir -p "$BIN_DIR"

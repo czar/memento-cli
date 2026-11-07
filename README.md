@@ -1,6 +1,13 @@
-# memento-cli ⏳
+# Memento Mori CLI & Mori-Kernel ⏳  
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Shell: Bash/Zsh](https://img.shields.io/badge/Shell-Bash%20%7C%20Zsh-blue.svg)]()
 
 **High-frequency wisdom injection for terminal-based workflows.**
+
+**Memento Mori CLI** is a terminal-based integration designed to bridge philosophical mindfulness with biological reality. It combines the "Mori-Kernel" (a life-statistics engine) with high-frequency wisdom injection from Tsongkhapa's *LamRim* (Stages of the Path to Enlightenment).
+
+By integrating directly into your shell environment, it serves as a constant, subtle reminder of impermanence—encouraging mindfulness and urgency in every terminal session.
 
 Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
 
@@ -9,53 +16,86 @@ Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the tradition
 ![terminal ss](images/demo2.png)
 ![terminal ss](images/demo3.png)
 
-## 🧠 The Philosophy
-Most CLI tools focus on **Latency** (speed). This tool focuses on **Presence**. 
 
-It injects "Interrupt Signals"—short, high-density quotes—into your shell startup. These are categorized by their systemic function:
-- **Urgency Protocol:** To combat procrastination and the illusion of infinite time.
-- **Vanitas Protocol:** To reduce attachment to digital/material clutter.
-- **Decay Protocol:** To ground the user in the biological reality of impermanence.
+### 💀 Mori-Kernel Integration
+The `mementomori` binary acts as a temporal engine. Upon shell startup, it calculates and displays vital life statistics based on your biological parameters, providing a "reality check" on the time remaining.
 
-## 🚀 One-Line Installation (no_mori)
-If you trust the source, run this command:
+### 📜 LamRim Wisdom Injection
+Automated injection of randomized philosophical quotes from the *LamRim* text. Quotes are categorized into three layers of mindfulness:
+- **The Urgency Protocol (Temporal Compression):** Reminders to act now before death arrives suddenly.
+- **The Vanitas Protocol (Attachment Filter):** Reflections on letting go of worldly attachments.
+- **The Decay Protocol (Biological Reality):** Observations on the impermanence of the physical form.
+
+### 🛠️ Seamless Shell Integration
+The installer automatically detects your shell (`bash` or `zsh`) and injects the logic into your configuration files (`.bashrc` or `.zshrc`), ensuring a zero-touch experience after installation.
+
+
+## 🚀 Installation
+
+**Prerequisites:**
+- A Linux/Unix-based environment.
+- `bash` or `zsh` installed.
+- The `mementomori` binary located in the same directory as `install.sh`.
+
+**Steps:**
+
+1. **Make the installer executable:**
+   ```bash
+   chmod +x install.sh
+   ```
+
+2. **Run the integration setup:**
+   ```bash
+   ./install.sh
+   ```
+
+3. **Follow the interactive prompts:**
+   - Enter your birthdate (`YYYY-MM-DD`).
+   - Specify sex (optional).
+   - Set expected lifetime (defaults to 81 years).
+
+4. **Finalize:**
+   Restart your terminal or run:
+   ```bash
+   source ~/.bashrc  # or source ~/.zshrc
+   ```
+## 📖 Usage
+
+### Automated Mode
+Once installed, the tool runs automatically every time you open a new terminal window. You will see:
+1. A randomized **LamRim Wisdom** quote in red text.
+2. Your **Mori-Kernel Stats** (Life countdown/statistics).
+
+### Manual Execution
+You can manually trigger the kernel stats at any time by calling the binary directly:
+
 ```bash
-curl -sSL https://raw.githubusercontent.com/czar/memento-cli/main/install-no_mori.sh | bash
+# Basic usage with birthdate and sex
+mementomori -b 1990-01-01 -s m -v
+
+# Flags:
+# -b <YYYY-MM-DD>  Set Birthdate
+# -s <m|f>         Set Sex (default: m)
+# -v               Verbose/Stats mode
 ```
-## 🛠 Installation (Full, includes mementomori)
-1. Clone the repo: `git clone https://github.com/czar/memento-cli.git`
-2. Enter the directory: `cd memento-cli`
-3. Run the installer: `./install.sh`
 
-## 📜 Requirements
-- A Unix-based terminal (Linux, macOS).
-- Bash or ZSH.
-- `sed` and `shuf` (standard on most distros).
+---
 
-## ⚖️ License
-Distributed under the MIT License. See `LICENSE` for more information.
+## 🏗️ Technical Architecture
 
-```MIT License
+### The Wisdom Store (`~/.lamrim_death.txt`)
+The installer creates a structured text database containing curated quotes from Tsongkhapa's *LamRim*. This file is parsed by the shell injection logic to provide randomized, high-impact reflections.
 
-Copyright (c) 2026 Czar_Automata (czar)
+### Injection Logic
+The `install.sh` script utilizes `sed` and `shuf` for non-intrusive, lightweight wisdom delivery:
+```bash
+# Example of the automated wisdom selector used in your config:
+QUOTE=$(sed -n 's/^\* \"\([^\"]*\)\" #.*/\1/p' ~/.lamrim_death.txt | shuf -n 1)
+```
 
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## 🛡️ License
+This project is released under the MIT License. The philosophical content (LamRim quotes) is provided as Public Domain content for the purpose of mindfulness practice.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
+---

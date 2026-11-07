@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# memento-cli no mori Integrated Installer (Optimized)
+# memento-cli (no mori-kernel) Integrated Installer (Optimized)
 # ------------------------------------------------------------------------------
 # Author: Czar_Automata (czar)
 # Includes: Quotes from Tsongkhapa's LamRim (Public Domain Content)

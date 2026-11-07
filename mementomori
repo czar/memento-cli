@@ -136,11 +136,20 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    
+    # 1. Required Argument
     parser.add_argument('-b', '--birthdate', required=True, type=valid_date)
-    parser.add_mutually_exclusive_group()
-    parser.add_argument('-s', '--sex', choices=['m', 'M', 'f', 'F'])
-    parser.add_argument('-l', '--lifetime', type=float)
+    
+    # 2. Create the Mutually Exclusive Group and assign it to a variable
+    group = parser.add_mutually_exclusive_group()
+    
+    # 3. Add the conflicting arguments TO THE GROUP, not the parser
+    group.add_argument('-s', '--sex', choices=['m', 'M', 'f', 'F'])
+    group.add_argument('-l', '--lifetime', type=float)
+    
+    # 4. Remaining non-conflicting arguments
     parser.add_argument('-v', '--verbose', action="store_true")
     parser.add_argument('--long', action="store_true")
+    
     args = parser.parse_args()
     main(args)

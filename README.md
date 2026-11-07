@@ -11,6 +11,7 @@ By integrating directly into your shell environment, it serves as a constant, su
 
 Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
 
+*
 ![terminal ss](images/demo.png)
 ![terminal ss](images/demo1.png)
 ![terminal ss](images/demo2.png)
@@ -97,7 +98,32 @@ QUOTE=$(sed -n 's/^\* \"\([^\"]*\)\" #.*/\1/p' ~/.lamrim_death.txt | shuf -n 1)
 This project is a modified fork/extension of **mementomori**.
 
 *   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
-*   **My Contribution:** Stochastic Modeling: Implemented a probabilistic "imminence" system to simulate life's uncertainty, UI Overhaul: Developed a high-signal HUD with ANSI color support and visual entropy bars & Refactored for Python 3 standards. 
+*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
+
+## 🧬 The Evolution: From Math to Reality
+
+The original implementation was a **deterministic calculator**—it told you exactly how many days were left based on static averages. While mathematically accurate, it lacked the inherent chaos of existence.
+
+**My version transforms this from a calculator into a Stochastic Model.**
+
+### What's New?
+
+#### 🎲 Stochastic Reality (The Chaos Engine)
+Life does not follow a linear path. My version introduces a "Reality Roll" every time you run the script:
+* **85% of the time**, you receive the standard biological expectation.
+* **12% of the time**, the system enters an **Imminent State**, simulating a sudden collapse in remaining time.
+* **3% of the time**, you hit **The End**—a total collapse of the timeline.
+
+#### 📊 High-Signal HUD
+No more reading long lists of numbers. The new interface provides a high-density "Heads Up Display":
+* **Color-Coded Vitality**: Green for life, Red for entropy.
+* **Entropy Meter**: A visual progress bar showing exactly how much of your timeline has been consumed.
+* **ANSI Terminal Styling**: Designed for terminal enthusiasts who want beautiful, high-contrast output.
+
+#### 🛠️ Dual-Mode Execution
+* **The Subliminal Mode (Default)**: A quiet, minimal prompt to remind you of mortality without being intrusive.
+* **The HUD Mode (`-v`)**: For those who want the full, high-signal breakdown of their current state.
+* **The Biological Truth Mode (`--long`)**: For those who wish to bypass the chaos and see the raw, uncollapsed mathematical data.
 
 
 ---

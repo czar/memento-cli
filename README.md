@@ -14,7 +14,6 @@ Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the tradition
 ![terminal ss](images/demo.png)
 ![terminal ss](images/demo1.png)
 ![terminal ss](images/demo2.png)
-![terminal ss](images/demo3.png)
 
 
 ### 💀 Mori-Kernel Integration

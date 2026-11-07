@@ -1,7 +1,39 @@
 #!/bin/bash
-# memento-cli Installer
+# memento-cli & mori-kernel Integrated Installer (Optimized)
 # Includes: Quotes from Tsongkhapa's LamRim (Public Domain Content)
-# 1. Create the Data Store
+
+# --- Configuration ---
+BIN_DIR="$HOME/.local/bin"
+mkdir -p "$BIN_DIR"
+export PATH="$BIN_DIR:$PATH"
+
+echo "--- 💀 Memento Mori Integration Setup ---"
+
+# 1. Collect User Data for the Kernel
+read -p "Enter your birthdate (YYYY-MM-DD): " BIRTHDATE
+if [[ ! $BIRTHDATE =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    echo "❌ Invalid date format. Please use YYYY-MM-DD."
+    exit 1
+fi
+
+read -p "Enter sex (m/f) [optional]: " SEX
+read -p "Enter expected lifetime in years [optional, default 81]: " LIFETIME
+LIFETIME=${LIFETIME:-81}
+
+# 2. Install the Kernel (mementomori)
+echo "📦 Installing mori-kernel to $BIN_DIR/mementomori..."
+
+# Check if source file exists before copying
+if [[ -f "mementomori" ]]; then
+    cp mementomori "$BIN_DIR/"
+    chmod +x "$BIN_DIR/mementomori"  # Added as requested
+    echo "✅ Kernel binary installed and made executable."
+else
+    echo "❌ Error: Source file 'mementomori' not found in current directory."
+    exit 1
+fi
+
+# 3. Create the Wisdom Data Store (LamRim)
 cat << 'EOF' > ~/.lamrim_death.txt
 # SOURCE: LamRim (Stages of the Path to Enlightenment)
 # AUTHOR: Tsongkhapa (14th-15th Century)
@@ -37,25 +69,42 @@ cat << 'EOF' > ~/.lamrim_death.txt
 * "Meditate again and again until you have turned your mind away from the activities of this life, which are like adorning yourself while being led to the execution ground." #Decay
 EOF
 
-# 2. Detect Shell
-if [[ "$SHELL" == *"zsh"* ]]; then
+# 4. Detect Shell
+if [[ "$SHELL" == *'zsh'* ]]; then
     CONF="$HOME/.zshrc"
-elif [[ "$SHELL" == *"bash"* ]]; then
+elif [[ "$SHELL" == *'bash'* ]]; then
     CONF="$HOME/.bashrc"
 else
     echo "❌ Unsupported shell: $SHELL"
     exit 1
 fi
 
-# 3. Inject Logic (with duplicate protection)
-INJECTION_LINE='QUOTE=$(sed -n '\''s/^\* "\(.*\)" #.*/\1/p'\'' ~/.lamrim_death.txt | shuf -n 1); [ -n "$QUOTE" ] && echo -e "\n\e[1;31m[Memento Mori]\e[0m $QUOTE\n"'
+# 5. Inject Logic (Wisdom + Kernel Stats)
+echo "💉 Injecting into $CONF..."
 
+# A. Wisdom Injection
+INJECTION_WISDOM='QUOTE=$(sed -n '\''s/^\* "\([^"]*\)" #.*/\1/p'\'' ~/.lamrim_death.txt | shuf -n 1); [ -n "$QUOTE" ] && echo -e "\n\e[1;31m[Memento Mori]\e[0m $QUOTE"'
+
+# B. Kernel Stats Injection
+# INJECTION_STATS="$BIN_DIR/mementomori -b $BIRTHDATE -s ${SEX:-m} -l $LIFETIME -v"
+INJECTION_STATS="$BIN_DIR/mementomori -b $BIRTHDATE -s ${SEX:-m} -v"
+
+# Apply injections with duplicate protection
 if ! grep -q "LamRim Wisdom Injector" "$CONF"; then
+    echo "" >> "$CONF"
     echo "# LamRim Wisdom Injector" >> "$CONF"
-    echo "$INJECTION_LINE" >> "$CONF"
-    echo "✅ LamRim-inspired injection added to $CONF"
+    echo "$INJECTION_WISDOM" >> "$CONF"
 else
-    echo "⚠️ Already installed (skipping injection)."
+    echo "⚠️ Wisdom already installed."
 fi
 
-echo "🚀 Restart your terminal or run 'source $CONF' to begin."
+if ! grep -q "Mori-Kernel Stats Injector" "$CONF"; then
+    echo "" >> "$CONF"
+    echo "# Mori-Kernel Stats Injector" >> "$CONF"
+    echo "$INJECTION_STATS" >> "$CONF"
+    echo "✅ Kernel stats injection added."
+else
+    echo "⚠️ Kernel stats already installed."
+fi
+
+echo "🚀 Integration complete. Restart your terminal or run 'source $CONF'."

@@ -5,6 +5,9 @@
 Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
 
 ![terminal ss](images/demo.png)
+![terminal ss](images/demo1.png)
+![terminal ss](images/demo2.png)
+![terminal ss](images/demo3.png)
 
 ## 🧠 The Philosophy
 Most CLI tools focus on **Latency** (speed). This tool focuses on **Presence**. 
@@ -54,4 +57,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 

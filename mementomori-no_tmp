@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+import argparse
+import random
+from datetime import datetime, date
+
+# --- ANSI COLOR CONSTANTS ---
+RESET = "\033[0m"
+BOLD  = "\033[1m"
+DIM   = "\033[2m"
+RED   = "\033[31m"    # Death/Entropy/Expired
+GREEN = "\033[32m"    # Life/Vitality
+CYAN  = "\033[36m"    # Metadata/Labels
+YELLOW = "\033[33m"   # Warning/Stats
+
+def valid_date(s):
+    """Validates the input date format YYYY-MM-DD."""
+    try:
+        return datetime.strptime(s, "%Y-%m-%d").date()
+    except ValueError:
+        msg = f"Not a valid date: '{s}'. Please use YYYY-MM-DD."
+        raise argparse.ArgumentTypeError(msg)
+
+def print_detailed_info(agedays, expect, lifetime):
+    """The original long-form output for anniversaries or --long flag."""
+    print('\n' + '='*30)
+    print(f"{BOLD}AGE STATUS:{RESET}")
+    print(f"  You are {agedays / 365.25:,.2f} years old")
+    print(f"  You are {agedays / 30.44:,.2f} months old")
+    print(f"  You are {agedays / 7.0:,.2f} weeks old")
+    print(f"  You are {agedays:,} days old")
+    print('\n' + f"{BOLD}EXPECTED LIFETIME:{RESET}")
+    print(f"  Approx. {expect / 365.25:,.2f} years")
+    print(f"  Approx. {expect / 30.44:,.2f} months")
+    print(f"  Approx. {expect / 7.0:,.2f} weeks")
+    print(f"  Approx. {expect:,.0f} days")
+    print('\n' + f"{BOLD}PROBABILITY:{RESET}")
+    percent_dead = (agedays / lifetime) * 100
+    percent_alive = (expect / lifetime) * 100
+    print(f"  You are approximately {RED}{percent_dead:.1f}%{RESET} dead")
+    print(f"  You are approximately {GREEN}{percent_alive:.1f}%{RESET} alive")
+    print('='*30 + '\n')
+
+def print_compact_info(agedays, expect, lifetime):
+    """The HIGH-SIGNAL output using colors and the entropy meter."""
+    percent_dead = (agedays / lifetime) * 100
+    percent_alive = (expect / lifetime) * 100
+
+    # 1. THE HEADER/SEPARATOR
+    separator = "-" * 60
+    print(f"\n{DIM}{separator}{RESET}")
+
+    # 2. THE STATS (High Signal)
+    # Format: [ AGE ] 15,922d | [ REMAINING ] 13,663d | [ VITALITY ] 46.2%
+    stats_line = (
+        f"{CYAN}[ AGE ]{RESET} {BOLD}{int(agedays):,}d{RESET} | "
+        f"{CYAN}[ REMAINING ]{RESET} {BOLD}{int(expect):,}d{RESET} | "
+        f"{CYAN}[ VITALITY ]{RESET} {GREEN}{percent_alive:.1f}%{RESET}"
+    )
+    print(stats_line)
+
+    # 3. THE PROGRESS BAR (The Entropy Meter)
+    # Format: [ ENTROPY ] [███░░] 53.8% EXPIRED
+    bar_width = 40
+    filled_len = int(bar_width * (percent_dead / 100))
+    empty_len = bar_width - filled_len
+    
+    # Build the bar string with colors: RED for dead, DIM for remaining
+    bar_visual = f"{RED}{'█' * filled_len}{DIM}{'░' * empty_len}{RESET}"
+    
+    entropy_line = (
+        f"{CYAN}[ ENTROPY ]{RESET} [{bar_visual}] "
+        f"{YELLOW}{percent_dead:.1f}% EXPIRED{RESET}"
+    )
+    print(entropy_line)
+
+    # 4. THE FOOTER/SEPARATOR
+    print(f"{DIM}{separator}{RESET}\n")
+
+def get_lifetime(args):
+    """Get lifetime in days based on sex or provided value."""
+    if args.lifetime is not None and args.lifetime > 0:
+        return args.lifetime * 365.25
+    sex = args.sex.upper() if args.sex else None
+    if sex == 'M':
+        return 79.3 * 365.25
+    elif sex == 'F':
+        return 82.9 * 365.25
+    else:
+        return 81.1 * 365.25
+
+def main(args):
+    try:
+        birthday = args.birthdate
+        today = date.today()
+        if birthday > today:
+            print(f"{RED}ERROR:{RESET} Birthdate {birthday} cannot be in the future.")
+            sys.exit(1)
+        if birthday.year < 1900:
+            print(f"{RED}ERROR:{RESET} Birthdate {birthday.year} is before supported range (1900).")
+            sys.exit(1)
+            
+        age_delta = today - birthday
+        agedays = age_delta.days
+        lifetime_days = get_lifetime(args)
+        expect_days = lifetime_days - agedays
+
+        is_anniversary = (
+            agedays % 365 == 0 or      
+            agedays % 1825 == 0 or     
+            agedays % 3652 == 0 or     
+            random.randint(1, 365) == 365
+        )
+
+        if args.long:
+            print_detailed_info(agedays, expect_days, lifetime_days)
+        elif args.verbose:
+            print_compact_info(agedays, expect_days, lifetime_days)
+        elif is_anniversary:
+            print_detailed_info(agedays, expect_days, lifetime_days)
+        else:
+            # A subtle prompt if no flags are used
+            print(f"{DIM}Memento Mori...{RESET} (Use {BOLD}-v{RESET} for summary or {BOLD}--long{RESET} for details)")
+
+    except Exception as e:
+        print(f"{RED}An error occurred: {e}{RESET}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Memento mori - Remember death. A tool for life expectancy reflection."
+    )
+    required = parser.add_argument_group('required arguments')
+    required.add_argument('-b', '--birthdate',
+            help='Date of birth (YYYY-MM-DD)',
+            required=True, type=valid_date)
+    mutex = parser.add_mutually_exclusive_group()
+    mutex.add_argument('-s', '--sex',
+            help='Sex (m/M for male, f/F for female)',
+            type=str, choices=['m', 'M', 'f', 'F'])
+    mutex.add_argument('-l', '--lifetime',
+            help='Expected lifetime in years (1-100)',
+            type=float, metavar='[1-100]')
+    optional = parser.add_argument_group('optional arguments')
+    optional.add_argument('-v', '--verbose',
+            help='Print concise summary immediately',
+            action="store_true")
+    optional.add_argument('--long',
+            help='Print detailed information (original format)',
+            action="store_true")
+    args = parser.parse_args()
+    main(args)

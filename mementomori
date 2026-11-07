@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+import argparse
+import random
+from datetime import datetime, date
+
+# --- ANSI COLOR CONSTANTS ---
+RESET = "\033[0m"
+BOLD  = "\033[1m"
+DIM   = "\033[2m"
+RED   = "\033[31m"    # Death/Entropy/Expired
+GREEN = "\033[32m"    # Life/Vitality
+CYAN = "\033[36m"    # Metadata/Labels
+YELLOW = "\033[33m"   # Warning/Stats
+MAGENTA = "\033[35m"  # Imminence/Chaos
+
+def valid_date(s):
+    try:
+        return datetime.strptime(s, "%Y-%m-%d").date()
+    except ValueError:
+        msg = f"Not a valid date: '{s}'. Please use YYYY-MM-DD."
+        raise argparse.ArgumentTypeError(msg)
+
+def apply_stochastic_reality(agedays, expected_days, lifetime_days):
+    """
+    Injects randomness into the system. 
+    If an 'Imminent' state is rolled, it collapses all stats toward zero.
+    Returns: (actual_remaining, actual_vitality, warning_text, is_imminent)
+    """
+    roll = random.random() * 100
+    
+    # 1. NORMAL REALITY (85% of the time)
+    if roll < 85:
+        percent_alive = (expected_days / lifetime_days) * 100
+        return expected_days, percent_alive, f"{CYAN}[ TEMPORALITY ]{RESET} {DIM}Uncertain / Unknown{RESET}", False
+
+    # 2. HIGH-IMMINENCE REALITY (12% of the time: 'SOON')
+    elif roll < 97:
+        # Collapse remaining days to a small window (e.g., 1 to 30 days)
+        imminent_days = random.randint(1, 30)
+        # Vitality collapses accordingly
+        imminent_vitality = (imminent_days / lifetime_days) * 100
+        return imminent_days, imminent_vitality, f"{MAGENTA}[ TEMPORALITY ]{RESET} {BOLD}{YELLOW}NEARBY/IMMINENT{RESET}", True
+
+    # 3. EXTREME REALITY (3% of the time: 'THE END')
+    else:
+        # Total collapse: just 1 day left.
+        return 1, 0.1, f"{MAGENTA}[ TEMPORALITY ]{RESET} {BOLD}{RED}SOON / 1 DAY{RESET}", True
+
+def print_compact_info(agedays, expect, lifetime):
+    """HIGH-SIGNAL HUD with collapsed reality support."""
+    # Determine the 'Actual' state via Stochastic Injection
+    actual_remaining, actual_vitality, temp_msg, is_imminent = apply_stochastic_reality(agedays, expect, lifetime)
+    
+    # Calculate percent_dead based on the ACTUAL (collapsed) remaining time
+    # This ensures the Entropy meter reflects the 'Imminence'
+    actual_percent_alive = actual_vitality
+    actual_percent_dead = 100 - actual_percent_alive
+
+    separator = "-" * 60
+    print(f"\n{DIM}{separator}{RESET}")
+
+    # 1. THE STATS (Using ACTUAL values, not the expected ones)
+    # If imminence is-active, 'REMAINING' will show a tiny number of days.
+    stats_line = (
+        f"{CYAN}[ AGE ]{RESET} {BOLD}{int(agedays):,}d{RESET} | "
+        f"{CYAN}[ REMAINING ]{RESET} {BOLD}{int(actual_remaining):,}d{RESET} | "
+        f"{CYAN}[ VITALITY ]{RESET} {GREEN if not is_imminent else RED}{actual_percent_alive:.1f}%{RESET}"
+    )
+    print(stats_line)
+
+    # 2. THE ENTROPY METER (Reflects collapsed-reality)
+    bar_width = 40
+    filled_len = int(bar_width * (actual_percent_dead / 100))
+    empty_len = bar_width - filled_len
+    bar_visual = f"{RED}{'█' * filled_len}{DIM}{'░' * empty_len}{RESET}"
+
+    entropy_line = (
+        f"{CYAN}[ ENTROPY ]{RESET} [{bar_visual}] "
+        f"{YELLOW}{actual_percent_dead:.1f}% EXPIRED{RESET}"
+    )
+    print(entropy_line)
+
+    # 3. THE TEMPORALITY (The message that triggered the collapse)
+    print(temp_msg)
+
+    print(f"{DIM}{separator}{RESET}\n")
+
+def get_lifetime(args):
+    if args.lifetime is not None and args.lifetime > 0:
+        return args.lifetime * 365.25
+    sex = args.sex.upper() if args.sex else None
+    if sex == 'M': return 79.3 * 365.25
+    elif sex == 'F': return 82.9 * 365.25
+    else: return 81.1 * 365.25
+
+def main(args):
+    try:
+        birthday = args.birthdate
+        today = date.today()
+        if birthday > today:
+            print(f"{RED}ERROR:{RESET} Birthdate {birthday} cannot be in the future.")
+            sys.exit(1)
+
+        age_delta = today - birthday
+        agedays = age_delta.days
+        lifetime_days = get_lifetime(args)
+        expect_days = lifetime_days - agedays
+        
+        if args.long:
+            # For --long, we show the 'Biological Truth' (uncollapsed-math)
+            percent_dead = (agedays / lifetime_days) * 100
+            print(f"\n{DIM}--- BIOLOGICAL EXPECTATION (UNCOLLAPSED) ---{RESET}")
+            print(f"  Age: {agedays} days")
+            print(f"  Expected Remaining: {int(expect_days)} days")
+            print(f"  Life Percentage: {100 - percent_dead:.2f}% USED")
+        elif args.verbose:
+            # High-signal mode (includes stochastic collapse)
+            print_compact_info(agedays, expect_days, lifetime_days)
+        else:
+            # Subliminal prompt
+            print(f"{DIM}Memento Mori...{RESET} (Use {BOLD}-v{RESET} for summary)")
+
+    except Exception as e:
+        print(f"{RED}An error occurred: {e}{RESET}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-b', '--birthdate', required=True, type=valid_date)
+    parser.add_mutually_exclusive_group()
+    parser.add_argument('-s', '--sex', choices=['m', 'M', 'f', 'F'])
+    parser.add_argument('-l', '--lifetime', type=float)
+    parser.add_argument('-v', '--verbose', action="store_true")
+    parser.add_argument('--long', action="store_true")
+    args = parser.parse_args()
+    main(args)

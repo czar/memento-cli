@@ -132,6 +132,45 @@ No more reading long lists of numbers. The new interface provides a high-density
 
 This project is released under the MIT License. The philosophical content (LamRim quotes) is provided as Public Domain content for the purpose of mindfulness practice. Mementomori & mori-kernel is a derivative of makeyourownmaker/mementomori, and is licensed under GPL-2
 
+
+## 🗑️ Uninstallation
+
+To completely remove Memento Mori from your system, follow these three steps:
+
+### 1. Remove the Binary and Data Store
+Run the following commands to delete the kernel binary and the wisdom text file:
+```bash
+rm ~/.local/bin/mementomori
+rm ~/.lamrim_death.txt
+```
+
+### 2. Clean up Shell Configuration
+The installer adds logic blocks to your `.bashrc` or `.zshrc`. You must remove these manually to prevent errors when opening new terminals.
+
+1. Open your configuration file:
+   ```bash
+   nano ~/.bashrc  # or nano ~/.zshrc if using Zsh
+   ```
+
+2. Scroll to the bottom of the file and delete the following two blocks:
+
+**Block A (Wisdom Injector):**
+```bash
+# LamRim Wisdom Injector
+QUOTE=$(sed -n 's/^\* \"\([^\"]*\)\" #.*/\1/p' ~/.lamrim_death.txt | shuf -n 1); [ -n "$QUOTE" ] && echo -e "\n\e[1;31m[Memento Mori]\e[0m $QUOTE"
+```
+
+**Block B (Kernel Stats Injector):**
+```bash
+# Mori-Kernel Stats Injector
+$HOME/.local/bin/mementomori -b [YOUR_BIRTHDATE] -s [YOUR_SEX] -v
+```
+
+3. Save and exit (`Ctrl+O`, `Enter`, then `Ctrl+X`).
+
+---
+
+
 ---
 *Built with intent to minimize entropy.*
 ---

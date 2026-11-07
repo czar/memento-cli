@@ -11,9 +11,12 @@ By integrating directly into your shell environment, it serves as a constant, su
 
 Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
 
-![Baseline State](images/demo.png)  -- **Nominal State**: System operating within standard parameters.
-![Critical Instability](images/demo1.png) -- **Approaching Criticality**: Accelerated temporal decay detected.
-![Total Collapse](images/demo2.png) -- **Terminal State**: Total systemic entropy; timeline-collapse complete.
+![Baseline State](images/demo.png)  
+<br>  **Nominal State**: System operating within standard parameters.
+![Critical Instability](images/demo1.png) 
+<br> **Approaching Criticality**: Accelerated temporal decay detected.
+![Total Collapse](images/demo2.png) 
+<br> **Terminal State**: Total systemic entropy; timeline-collapse complete.
 
 ### 💀 Mori-Kernel Integration
 The `mementomori` binary acts as a temporal engine. Upon shell startup, it calculates and displays vital life statistics based on your biological parameters, providing a "reality check" on the time remaining.

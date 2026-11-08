@@ -32,7 +32,7 @@ The installer automatically detects your shell (`bash` or `zsh`) and injects the
 This project is a modified fork/extension of **mementomori**.
 
 *   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
-*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
+*   **My Contribution:** Stochastic Modeling, UI Overhaul, The Wisdom Store of lamrim_death.txt, LamRim Wisdom Injector, and Refactored for Python 3 standards.
 
 ## 🚀 Installation
 

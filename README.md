@@ -20,6 +20,15 @@ Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the tradition
 **Terminal State**: Total systemic entropy; timeline-collapse complete.
 ![Total Collapse](images/demo2.png) 
 
+
+## 📜 Credits & Lineage
+
+This project is a modified fork/extension of **mementomori**.
+
+*   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
+*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
+
+
 ### 💀 Mori-Kernel Integration
 The `mementomori` binary acts as a temporal engine. Upon shell startup, it calculates and displays vital life statistics based on your biological parameters, providing a "reality check" on the time remaining.
 
@@ -96,13 +105,6 @@ The `install.sh` script utilizes `sed` and `shuf` for non-intrusive, lightweight
 QUOTE=$(sed -n 's/^\* \"\([^\"]*\)\" #.*/\1/p' ~/.lamrim_death.txt | shuf -n 1)
 ```
 
-## 📜 Credits & Lineage
-
-This project is a modified fork/extension of **mementomori**.
-
-*   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
-*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
-
 ## 🧬 The Evolution: From Math to Reality
 
 The original implementation was a **deterministic calculator**—it told you exactly how many days were left based on static averages. While mathematically accurate, it lacked the inherent chaos of existence.
@@ -167,9 +169,6 @@ $HOME/.local/bin/mementomori -b [YOUR_BIRTHDATE] -s [YOUR_SEX] -v
 ```
 
 3. Save and exit (`Ctrl+O`, `Enter`, then `Ctrl+X`).
-
----
-
 
 ---
 *Built with intent to minimize entropy.*

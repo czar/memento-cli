@@ -9,25 +9,10 @@
 
 By integrating directly into your shell environment, it serves as a constant, subtle reminder of impermanence—encouraging mindfulness and urgency in every terminal session.
 
-Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
-
 **Nominal State**: System operating within standard parameters.
 ![Baseline State](images/demo.png)  
 
-**Approaching Criticality**: Accelerated temporal decay detected.
-![Critical Instability](images/demo1.png) 
-
-**Terminal State**: Total systemic entropy; timeline-collapse complete.
-![Total Collapse](images/demo2.png) 
-
-
-## 📜 Credits & Lineage
-
-This project is a modified fork/extension of **mementomori**.
-
-*   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
-*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
-
+Inspired by the *LamRim* (Stages of the Path to Enlightenment) and the traditions of *Memento Mori* and *Vanitas*, `memento-cli` transforms your terminal from a mere utility into an active site of awareness.
 
 ### 💀 Mori-Kernel Integration
 The `mementomori` binary acts as a temporal engine. Upon shell startup, it calculates and displays vital life statistics based on your biological parameters, providing a "reality check" on the time remaining.
@@ -41,6 +26,13 @@ Automated injection of randomized philosophical quotes from the *LamRim* text. Q
 ### 🛠️ Seamless Shell Integration
 The installer automatically detects your shell (`bash` or `zsh`) and injects the logic into your configuration files (`.bashrc` or `.zshrc`), ensuring a zero-touch experience after installation.
 
+
+## 📜 Credits & Lineage
+
+This project is a modified fork/extension of **mementomori**.
+
+*   **Original Source:** [makeyourownmaker/mementomori](https://github.com/makeyourownmaker/mementomori)
+*   **My Contribution:** Stochastic Modeling, UI Overhaul and Refactored for Python 3 standards. 
 
 ## 🚀 Installation
 
@@ -118,6 +110,12 @@ Life does not follow a linear path. My version introduces a "Reality Roll" every
 * **85% of the time**, you receive the standard biological expectation.
 * **12% of the time**, the system enters an **Imminent State**, simulating a sudden collapse in remaining time.
 * **3% of the time**, you hit **The End**—a total collapse of the timeline.
+
+**Approaching Criticality**: Accelerated temporal decay detected.
+![Critical Instability](images/demo1.png) 
+
+**Terminal State**: Total systemic entropy; timeline-collapse complete.
+![Total Collapse](images/demo2.png) 
 
 #### 📊 High-Signal HUD
 No more reading long lists of numbers. The new interface provides a high-density "Heads Up Display":
